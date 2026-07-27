@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INFINITUM DSE English Speaking Practice</title>
+<style>
+  :root{
+    --ink:#1f2a37; --muted:#6b7280; --line:#e5e7eb; --bg:#f6f7f9;
+    --brand:#0f766e; --brand-dark:#0b5850; --accent:#b91c1c; --warn:#92400e;
+    --warnbg:#fffbeb; --warnline:#fcd34d; --ok:#065f46; --okbg:#ecfdf5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang HK","Microsoft JhengHei",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:620px;margin:0 auto;padding:18px 16px 48px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 16px;margin:14px 0;
+    box-shadow:0 1px 2px rgba(16,24,40,.04)}
+  header.hero{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;
+    border-radius:16px;padding:22px 18px;margin-top:6px}
+  header.hero h1{margin:0 0 8px;font-size:20px;line-height:1.3}
+  .pill{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    color:#fff;font-weight:700;font-size:13px;padding:3px 11px;border-radius:999px}
+  .flow{margin:0;padding-left:18px;font-size:13.5px}
+  .flow li{margin:5px 0}
+  h2{font-size:15px;margin:0 0 10px;letter-spacing:.02em}
+  label{display:block;font-weight:600;font-size:14px;margin:12px 0 5px}
+  .req{color:var(--accent)}
+  input[type=text],input[type=tel]{width:100%;padding:11px 12px;font-size:16px;border:1px solid #cfd4dc;
+    border-radius:10px;background:#fff;outline:none}
+  input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(15,118,110,.15)}
+  .hint{color:var(--muted);font-size:12.5px;margin-top:4px}
+  .rules{font-size:13.5px}
+  .rules li{margin:5px 0}
+  .venue-title{font-weight:700;font-size:14px;margin:6px 0 2px;color:var(--brand-dark)}
+  .venue-addr{color:var(--muted);font-size:12.5px;margin:0 0 8px}
+  .session{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;
+    padding:11px 12px;margin:8px 0;cursor:pointer;transition:border-color .15s,background .15s}
+  .session:hover{border-color:#cbd5e1}
+  .session.checked{border-color:var(--brand);background:#f0fdfa}
+  .session input{width:20px;height:20px;accent-color:var(--brand);flex:0 0 auto}
+  .session .meta{flex:1 1 auto;min-width:0}
+  .session .lab{font-weight:600;font-size:14.5px}
+  .badge{flex:0 0 auto;font-size:12.5px;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap;
+    background:var(--okbg);color:var(--ok);border:1px solid #a7f3d0}
+  .badge.full{background:#fef2f2;color:var(--accent);border-color:#fecaca}
+  button.submit{width:100%;padding:14px;font-size:16px;font-weight:700;color:#fff;background:var(--brand);
+    border:none;border-radius:12px;margin-top:8px;cursor:pointer}
+  button.submit:disabled{opacity:.6;cursor:not-allowed}
+  .err{display:none;background:#fef2f2;border:1px solid #fecaca;color:var(--accent);border-radius:10px;
+    padding:10px 12px;margin:10px 0;font-size:13.5px}
+  .err.show{display:block}
+  .foot{color:var(--muted);font-size:12px;text-align:center;margin-top:18px}
+  .done{display:none;text-align:center;padding:10px 4px}
+  .done.show{display:block}
+  .done .tick{width:56px;height:56px;border-radius:50%;background:var(--okbg);color:var(--ok);
+    display:flex;align-items:center;justify-content:center;font-size:30px;margin:6px auto 12px;border:1px solid #a7f3d0}
+  .done h2{font-size:18px}
+  .skel{color:var(--muted);text-align:center;padding:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>INFINITUM DSE English Speaking Practice</h1>
+    <span class="pill">費用全免 · FREE</span>
+  </header>
+
+  <div id="loading" class="skel">載入中… Loading…</div>
+
+  <div id="formArea" style="display:none">
+
+    <div class="card rules">
+      <h2>報名須知 · Please read</h2>
+      <ul style="margin:0;padding-left:18px">
+        <li>模擬真實 DSE 英文口試,每節只收 <b>4 位</b>同學。</li>
+        <li>可揀多過一節。每節顯示現時報名人數,<b>額滿即進 waiting list</b>。</li>
+        <li>名額有限,<b>只報 1–2 節嘅同學會優先</b>。</li>
+        <li><b>無故缺席 / 遲到超過 5 分鐘 = 取消所有 Free Speaking Practice 資格。</b></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>課堂流程 · 75 分鐘（費用全免 FREE)</h2>
+      <ul class="flow">
+        <li>考前 Briefing — Speaking 考試心態（5 分鐘）</li>
+        <li>Preparation（10 分鐘）</li>
+        <li>Part A — Group Interaction（8 分鐘）</li>
+        <li>Part B — Individual Response（4 分鐘）</li>
+        <li>休息時間（5 分鐘）</li>
+        <li>Feedback（28 分鐘）</li>
+        <li>重播錄影片段 ＋ 改善方向（15 分鐘）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>學生資料 · Your details</h2>
+      <label>中文全名 <span class="req">*</span></label>
+      <input id="chineseName" type="text" placeholder="例:陳大文">
+      <label>English nickname <span class="req">*</span></label>
+      <input id="nickname" type="text" placeholder="e.g. Ken">
+      <label>學校 School <span class="req">*</span></label>
+      <input id="school" type="text" placeholder="例:King's Glory College">
+      <label>電話 Phone (WhatsApp) <span class="req">*</span></label>
+      <input id="phone" type="tel" inputmode="numeric" placeholder="例:9123 4567">
+    </div>
+
+    <div class="card">
+      <h2>選擇場次 · Choose your session(s)</h2>
+      <div id="venue-mk"></div>
+      <div id="venue-tw"></div>
+    </div>
+
+    <div id="err" class="err"></div>
+    <button id="submitBtn" class="submit">提交報名 · Submit</button>
+    <p class="hint" style="text-align:center">提交後座位未算確認,我們會以電話 / WhatsApp 通知。</p>
+  </div>
+
+  <div id="doneArea" class="card done">
+    <div class="tick">✓</div>
+    <h2>多謝報名!Thank you.</h2>
+    <p id="doneMsg" style="font-size:14px;color:var(--muted)"></p>
+  </div>
+
+  <div class="foot">
+    <div class="venue-title">分校地址</div>
+    <div class="venue-addr">旺角分校:旺角 周大福商業中心6樓 601至603室（油麻地站 A2 出口）</div>
+    <div class="venue-addr">荃灣分校:荃灣豪輝中心1座商場（荃灣站 B / C 出口)</div>
+  </div>
+</div>
+
+<!-- hidden iframe that receives the POST response (so we don't need CORS) -->
+<iframe id="sink" name="sink" style="display:none"></iframe>
+
+<script>
+  /* ====================================================================
+     貼上你的 Apps Script 網址(以 /exec 結尾)喺下面兩個引號之間:
+     ==================================================================== */
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9-mJmfMSE8V0sI-ofWgrEZVU7d1Lcinn5Au4L8vGqqPoXI-ERj4fXEicDjQ3ZHa604g/exec";
+
+  var CFG = null;
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  // ---- JSONP: cross-domain read that Safari allows ----
+  function jsonp(params, cb){
+    var name = 'cb_' + Math.random().toString(36).slice(2);
+    var s = document.createElement('script');
+    window[name] = function(data){
+      try { cb(data); } finally { delete window[name]; if(s.parentNode) s.parentNode.removeChild(s); }
+    };
+    var q = [];
+    for (var k in params) q.push(encodeURIComponent(k) + '=' + encodeURIComponent(params[k]));
+    q.push('callback=' + name);
+    s.onerror = function(){ delete window[name]; if(s.parentNode) s.parentNode.removeChild(s);
+      document.getElementById('loading').textContent = '載入失敗,請重新整理。Load failed — please refresh.'; };
+    s.src = SCRIPT_URL + '?' + q.join('&');
+    document.body.appendChild(s);
+  }
+
+  // ---- Load config + counts on open ----
+  jsonp({ action:'config' }, function(cfg){
+    if(!cfg || !cfg.ok){ document.getElementById('loading').textContent='載入失敗。Load failed.'; return; }
+    CFG = cfg; render();
+  });
+
+  function badgeHtml(id){
+    var n = CFG.counts[id] || 0, cap = CFG.cap;
+    if(n >= cap) return '<span class="badge full">'+n+' / '+cap+' · 候補 Waiting list</span>';
+    return '<span class="badge">'+n+' / '+cap+'</span>';
+  }
+  function venueBlock(vKey){
+    var v = CFG.venues[vKey];
+    var html = '<div class="venue-title">'+esc(v.name)+'</div><div class="venue-addr">'+esc(v.address)+'</div>';
+    CFG.sessions.filter(function(s){return s.venue===vKey;}).forEach(function(s){
+      html += '<label class="session"><input type="checkbox" value="'+s.id+'">'
+           +  '<span class="meta"><span class="lab">'+esc(s.label)+'</span></span>'+badgeHtml(s.id)+'</label>';
+    });
+    return html;
+  }
+  function render(){
+    document.getElementById('venue-mk').innerHTML = venueBlock('mk');
+    document.getElementById('venue-tw').innerHTML = venueBlock('tw');
+    document.getElementById('loading').style.display='none';
+    document.getElementById('formArea').style.display='block';
+    document.querySelectorAll('.session input').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        this.closest('.session').classList.toggle('checked', this.checked);
+      });
+    });
+    document.getElementById('submitBtn').addEventListener('click', submit);
+  }
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function chosen(){ return Array.prototype.map.call(
+    document.querySelectorAll('.session input:checked'), function(cb){return cb.value;}); }
+  function showErr(m){ var e=document.getElementById('err'); e.textContent=m; e.classList.add('show');
+    e.scrollIntoView({behavior:'smooth',block:'center'}); }
+  function clearErr(){ document.getElementById('err').classList.remove('show'); }
+
+  var posting = false;
+  function submit(){
+    clearErr();
+    var p = { chineseName:val('chineseName'), nickname:val('nickname'),
+              school:val('school'), phone:val('phone'), sessions:chosen() };
+    if(!p.chineseName||!p.nickname||!p.school||!p.phone) return showErr('請填寫所有欄位。Please fill in all fields.');
+    if(p.sessions.length===0) return showErr('請最少選擇一節。Please choose at least one session.');
+    if(SCRIPT_URL.indexOf('/exec') < 0) return showErr('未設定 SCRIPT_URL(請貼上 /exec 網址)。');
+
+    var btn=document.getElementById('submitBtn'); btn.disabled=true; btn.textContent='提交中… Submitting…';
+
+    // POST via a hidden form -> hidden iframe (no CORS needed, works in Safari)
+    var iframe = document.getElementById('sink');
+    posting = true;
+    iframe.onload = function(){ if(!posting) return; posting = false; afterSubmit(); };
+
+    var form=document.createElement('form');
+    form.method='POST'; form.action=SCRIPT_URL; form.target='sink'; form.style.display='none';
+    add(form,'chineseName',p.chineseName); add(form,'nickname',p.nickname);
+    add(form,'school',p.school); add(form,'phone',p.phone);
+    add(form,'sessions',p.sessions.join(','));
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(function(){ if(form.parentNode) form.parentNode.removeChild(form); }, 2000);
+  }
+  function add(form,name,value){ var i=document.createElement('input'); i.type='hidden'; i.name=name; i.value=value; form.appendChild(i); }
+
+  function afterSubmit(){
+    jsonp({ action:'config' }, function(cfg){ if(cfg && cfg.counts){ CFG.counts = cfg.counts; } });
+    document.getElementById('formArea').style.display='none';
+    document.getElementById('doneMsg').textContent =
+      '我們會以電話 / WhatsApp 確認你的座位。優先取錄只報 1–2 節嘅同學。提提你:無故缺席 / 遲到超過 5 分鐘會取消所有 Free Speaking Practice 資格。';
+    document.getElementById('doneArea').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+</script>
+</body>
+</html>
