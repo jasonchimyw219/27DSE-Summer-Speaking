@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INFINITUM DSE English Speaking Practice</title>
+<title>INFINITUM DSE Zoom Speaking Session · October</title>
 <style>
   :root{
     --ink:#1f2a37; --muted:#6b7280; --line:#e5e7eb; --bg:#f6f7f9;
@@ -19,11 +19,10 @@
     box-shadow:0 1px 2px rgba(16,24,40,.04)}
   header.hero{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;
     border-radius:16px;padding:22px 18px;margin-top:6px}
-  header.hero h1{margin:0 0 8px;font-size:20px;line-height:1.3}
+  header.hero h1{margin:0 0 4px;font-size:20px;line-height:1.3}
+  header.hero .sub{margin:0 0 10px;font-size:14px;opacity:.9}
   .pill{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
-    color:#fff;font-weight:700;font-size:13px;padding:3px 11px;border-radius:999px}
-  .flow{margin:0;padding-left:18px;font-size:13.5px}
-  .flow li{margin:5px 0}
+    color:#fff;font-weight:700;font-size:13px;padding:3px 11px;border-radius:999px;margin:0 6px 4px 0}
   h2{font-size:15px;margin:0 0 10px;letter-spacing:.02em}
   label{display:block;font-weight:600;font-size:14px;margin:12px 0 5px}
   .req{color:var(--accent)}
@@ -45,6 +44,7 @@
   .badge{flex:0 0 auto;font-size:12.5px;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap;
     background:var(--okbg);color:var(--ok);border:1px solid #a7f3d0}
   .badge.full{background:#fef2f2;color:var(--accent);border-color:#fecaca}
+  .badge.wait{background:#f3f4f6;color:var(--muted);border-color:var(--line)}
   button.submit{width:100%;padding:14px;font-size:16px;font-weight:700;color:#fff;background:var(--brand);
     border:none;border-radius:12px;margin-top:8px;cursor:pointer}
   button.submit:disabled{opacity:.6;cursor:not-allowed}
@@ -57,7 +57,6 @@
   .done .tick{width:56px;height:56px;border-radius:50%;background:var(--okbg);color:var(--ok);
     display:flex;align-items:center;justify-content:center;font-size:30px;margin:6px auto 12px;border:1px solid #a7f3d0}
   .done h2{font-size:18px}
-  .skel{color:var(--muted);text-align:center;padding:26px}
 </style>
 </head>
 <body>
@@ -65,33 +64,21 @@
 
   <header class="hero">
     <h1>INFINITUM DSE English Speaking Practice</h1>
+    <p class="sub">Zoom Speaking Session · 10月 October</p>
     <span class="pill">費用全免 · FREE</span>
+    <span class="pill">Zoom 網上進行 · Online</span>
   </header>
 
-  <div id="loading" class="skel">載入中… Loading…</div>
-
-  <div id="formArea" style="display:none">
+  <div id="formArea">
 
     <div class="card rules">
       <h2>報名須知 · Please read</h2>
       <ul style="margin:0;padding-left:18px">
-        <li>模擬真實 DSE 英文口試,每節只收 <b>4 位</b>同學。</li>
+        <li>經 <b>Zoom</b> 網上進行,模擬真實 DSE 英文口試,每節只收 <b>4 位</b>同學。</li>
         <li>可揀多過一節。每節顯示現時報名人數,<b>額滿即進 waiting list</b>。</li>
         <li>名額有限,<b>只報 1–2 節嘅同學會優先</b>。</li>
+        <li>Zoom 連結會喺上堂前以 <b>WhatsApp</b> 發送。請預備穩定網絡,並開啟鏡頭同咪。</li>
         <li><b>無故缺席 / 遲到超過 5 分鐘 = 取消所有 Free Speaking Practice 資格。</b></li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>課堂流程 · 75 分鐘（費用全免 FREE)</h2>
-      <ul class="flow">
-        <li>考前 Briefing — Speaking 考試心態（5 分鐘）</li>
-        <li>Preparation（10 分鐘）</li>
-        <li>Part A — Group Interaction（8 分鐘）</li>
-        <li>Part B — Individual Response（4 分鐘）</li>
-        <li>休息時間（5 分鐘）</li>
-        <li>Feedback（28 分鐘）</li>
-        <li>重播錄影片段 ＋ 改善方向（15 分鐘）</li>
       </ul>
     </div>
 
@@ -109,13 +96,14 @@
 
     <div class="card">
       <h2>選擇場次 · Choose your session(s)</h2>
-      <div id="venue-mk"></div>
-      <div id="venue-tw"></div>
+      <div class="venue-title">Zoom 網上 · Online</div>
+      <div class="venue-addr">每節 1 小時 · 1 hour per session</div>
+      <div id="sessionList"></div>
     </div>
 
     <div id="err" class="err"></div>
     <button id="submitBtn" class="submit">提交報名 · Submit</button>
-    <p class="hint" style="text-align:center">報名後會有 admin 以 WhatsApp 通知。</p>
+    <p class="hint" style="text-align:center">報名後會有 admin 以 WhatsApp 通知,並發送 Zoom 連結。</p>
   </div>
 
   <div id="doneArea" class="card done">
@@ -124,11 +112,7 @@
     <p id="doneMsg" style="font-size:14px;color:var(--muted)"></p>
   </div>
 
-  <div class="foot">
-    <div class="venue-title">分校地址</div>
-    <div class="venue-addr">旺角分校:旺角 周大福商業中心6樓 601至603室（油麻地站 A2 出口）</div>
-    <div class="venue-addr">荃灣分校:荃灣豪輝中心1座商場（荃灣站 B / C 出口)</div>
-  </div>
+  <div class="foot">INFINITUM · DSE English Speaking Practice (Zoom)</div>
 </div>
 
 <!-- hidden iframe that receives the POST response (so we don't need CORS) -->
@@ -136,11 +120,22 @@
 
 <script>
   /* ====================================================================
-     貼上你的 Apps Script 網址(以 /exec 結尾)喺下面兩個引號之間:
+     Apps Script 網址(以 /exec 結尾)— 同舊版一樣
      ==================================================================== */
   var SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9-mJmfMSE8V0sI-ofWgrEZVU7d1Lcinn5Au4L8vGqqPoXI-ERj4fXEicDjQ3ZHa604g/exec";
 
-  var CFG = null;
+  /* ====================================================================
+     十月 Zoom 場次 — 改日期/時間就喺呢度改
+     id 要同 Apps Script 入面嘅 session id 一樣
+     ==================================================================== */
+  var SESSIONS = [
+    { id:'Z1017', label:'10月17日 (六) · 2:00–3:00pm' },
+    { id:'Z1024', label:'10月24日 (六) · 2:00–3:00pm' },
+    { id:'Z1026', label:'10月26日 (一) · 7:30–8:30pm' },
+    { id:'Z1031', label:'10月31日 (六) · 2:00–3:00pm' }
+  ];
+  var CAP = 4;
+  var COUNTS = null;   // filled from Apps Script when it loads
 
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -155,44 +150,51 @@
     var q = [];
     for (var k in params) q.push(encodeURIComponent(k) + '=' + encodeURIComponent(params[k]));
     q.push('callback=' + name);
-    s.onerror = function(){ delete window[name]; if(s.parentNode) s.parentNode.removeChild(s);
-      document.getElementById('loading').textContent = '載入失敗,請重新整理。Load failed — please refresh.'; };
+    s.onerror = function(){ delete window[name]; if(s.parentNode) s.parentNode.removeChild(s); };
     s.src = SCRIPT_URL + '?' + q.join('&');
     document.body.appendChild(s);
   }
 
-  // ---- Load config + counts on open ----
-  jsonp({ action:'config' }, function(cfg){
-    if(!cfg || !cfg.ok){ document.getElementById('loading').textContent='載入失敗。Load failed.'; return; }
-    CFG = cfg; render();
-  });
-
   function badgeHtml(id){
-    var n = CFG.counts[id] || 0, cap = CFG.cap;
-    if(n >= cap) return '<span class="badge full">'+n+' / '+cap+' · 候補 Waiting list</span>';
-    return '<span class="badge">'+n+' / '+cap+'</span>';
+    if(!COUNTS) return '<span class="badge wait">– / '+CAP+'</span>';
+    var n = COUNTS[id] || 0;
+    if(n >= CAP) return '<span class="badge full">'+n+' / '+CAP+' · 候補 Waiting list</span>';
+    return '<span class="badge">'+n+' / '+CAP+'</span>';
   }
-  function venueBlock(vKey){
-    var v = CFG.venues[vKey];
-    var html = '<div class="venue-title">'+esc(v.name)+'</div><div class="venue-addr">'+esc(v.address)+'</div>';
-    CFG.sessions.filter(function(s){return s.venue===vKey;}).forEach(function(s){
-      html += '<label class="session"><input type="checkbox" value="'+s.id+'">'
-           +  '<span class="meta"><span class="lab">'+esc(s.label)+'</span></span>'+badgeHtml(s.id)+'</label>';
+
+  // Draw the session list once; afterwards only the badges are refreshed
+  function renderSessions(){
+    var html = '';
+    SESSIONS.forEach(function(s){
+      html += '<label class="session"><input type="checkbox" value="'+esc(s.id)+'">'
+           +  '<span class="meta"><span class="lab">'+esc(s.label)+'</span></span>'
+           +  '<span class="badge-slot" data-id="'+esc(s.id)+'">'+badgeHtml(s.id)+'</span></label>';
     });
-    return html;
-  }
-  function render(){
-    document.getElementById('venue-mk').innerHTML = venueBlock('mk');
-    document.getElementById('venue-tw').innerHTML = venueBlock('tw');
-    document.getElementById('loading').style.display='none';
-    document.getElementById('formArea').style.display='block';
+    document.getElementById('sessionList').innerHTML = html;
     document.querySelectorAll('.session input').forEach(function(cb){
       cb.addEventListener('change', function(){
         this.closest('.session').classList.toggle('checked', this.checked);
       });
     });
-    document.getElementById('submitBtn').addEventListener('click', submit);
   }
+  function refreshBadges(){
+    document.querySelectorAll('.badge-slot').forEach(function(el){
+      el.innerHTML = badgeHtml(el.getAttribute('data-id'));
+    });
+  }
+  function loadCounts(){
+    jsonp({ action:'config' }, function(cfg){
+      if(!cfg || !cfg.ok) return;
+      if(cfg.cap) CAP = cfg.cap;
+      COUNTS = cfg.counts || {};
+      refreshBadges();
+    });
+  }
+
+  renderSessions();
+  loadCounts();
+  document.getElementById('submitBtn').addEventListener('click', submit);
+
   function val(id){ return document.getElementById(id).value.trim(); }
   function chosen(){ return Array.prototype.map.call(
     document.querySelectorAll('.session input:checked'), function(cb){return cb.value;}); }
@@ -228,10 +230,10 @@
   function add(form,name,value){ var i=document.createElement('input'); i.type='hidden'; i.name=name; i.value=value; form.appendChild(i); }
 
   function afterSubmit(){
-    jsonp({ action:'config' }, function(cfg){ if(cfg && cfg.counts){ CFG.counts = cfg.counts; } });
+    loadCounts();
     document.getElementById('formArea').style.display='none';
     document.getElementById('doneMsg').textContent =
-      '我們會以電話 / WhatsApp 確認你的座位。優先取錄只報 1–2 節嘅同學。提提你:無故缺席 / 遲到超過 5 分鐘會取消所有 Free Speaking Practice 資格。';
+      '我們會以電話 / WhatsApp 確認你的座位,並發送 Zoom 連結。優先取錄只報 1–2 節嘅同學。提提你:無故缺席 / 遲到超過 5 分鐘會取消所有 Free Speaking Practice 資格。';
     document.getElementById('doneArea').classList.add('show');
     window.scrollTo({top:0,behavior:'smooth'});
   }
